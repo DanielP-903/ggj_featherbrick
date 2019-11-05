@@ -8,7 +8,8 @@ public class Movement : MonoBehaviour
     public float speed = 2;
     public bool is_grounded;
     Vector2 movement_position;
-
+    public Sprite idle;
+    //public Sprite walking;
     private CharacterController characterController;
     // Start is called before the first frame update
     void Start()
@@ -39,7 +40,23 @@ public class Movement : MonoBehaviour
         //this.GetComponent<Rigidbody>().MovePosition(new Vector3(transform.position.x + movement.x, transform.position.y, 0));
         this.GetComponent<Rigidbody>().AddForce(((movement * 0.75f)) + (jumpforce * 5.0f), ForceMode.Impulse);
 
-
+        if (movement.x > 0)
+        {
+            this.GetComponent<Animator>().Play("TigerAnimation");
+            this.GetComponent<SpriteRenderer>().flipX = true;
+            this.GetComponent<Animator>().enabled = true;// = false;
+        }
+        else if (movement.x < 0)
+        {
+            this.GetComponent<Animator>().Play("TigerAnimation");
+            this.GetComponent<SpriteRenderer>().flipX = false;
+            this.GetComponent<Animator>().enabled = true;// = false;
+        }
+        else if (movement.x == 0)
+        {
+            this.GetComponent<SpriteRenderer>().sprite = idle;
+            this.GetComponent<Animator>().enabled = false;// = false;
+        }
     }
 
     private void FixedUpdate()
