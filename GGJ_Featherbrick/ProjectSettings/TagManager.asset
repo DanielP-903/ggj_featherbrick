@@ -7,6 +7,7 @@ TagManager:
   - Trash
   - Building
   - Spawn_Point
+  - Bin
   layers:
   - Default
   - TransparentFX

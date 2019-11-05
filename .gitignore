@@ -336,3 +336,4 @@ GGJ_Featherbrick/Library/APIUpdater/project-dependencies.graph
 GGJ_Featherbrick/Library/ScriptAssemblies/UnityEngine.UI.dll
 GGJ_Featherbrick/Library/ScriptAssemblies/UnityEngine.TestRunner.dll
 *.dll
+*.meta
