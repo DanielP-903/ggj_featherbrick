@@ -22,6 +22,11 @@ public class CharacterController : MonoBehaviour
     //Reference to the picked up piece of trash
     public GameObject Trash;
 
+    bool TrashPickedUp = false;
+    bool HoldingTrash = false;
+    bool InitiallyPressed = false;
+    bool CurrentlyPressed = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -72,10 +77,42 @@ public class CharacterController : MonoBehaviour
             GetComponent<Rigidbody>().AddForce(JumpForce * Vector3.up, ForceMode.Impulse);
         }
     }
+    
+    bool GetButtonDown()
+    {
+        if (Input.GetAxisRaw("Pick Up") == 0)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
 
     void PickupTrash()
     {
+        if (CurrentlyPressed && InitiallyPressed)
+        {
+            InitiallyPressed = false;
+        }
+        if (!InitiallyPressed && !CurrentlyPressed)
+        {
+            InitiallyPressed = true;
+            CurrentlyPressed = true;
+        }
+        if (Input.GetAxisRaw("Pick Up") == 0 && CurrentlyPressed)
+        {
+            CurrentlyPressed = false;
+        }
 
+
+
+
+        if(InitiallyPressed)
+        {
+
+        }
     }
 
     void ThrowTrash()
