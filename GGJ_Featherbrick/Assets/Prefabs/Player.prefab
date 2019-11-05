@@ -55,11 +55,11 @@ GameObject:
   - component: {fileID: 8999157691289223825}
   - component: {fileID: 2960049677736233472}
   - component: {fileID: 5820468403354840376}
-  - component: {fileID: 1781861937747304998}
   - component: {fileID: 6839677590407555378}
   - component: {fileID: 8904613129735237480}
+  - component: {fileID: 1509219630310442729}
   m_Layer: 0
-  m_Name: Player 2
+  m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -109,21 +109,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 2
---- !u!114 &1781861937747304998
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2098659572459812891}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec10a24d6cc182a4f8a6243699f4f622, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 2
-  is_grounded: 0
-  idle: {fileID: 21300000, guid: d2ed9b9ea35b6624d95e4b400a490aba, type: 3}
 --- !u!212 &6839677590407555378
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -192,3 +177,21 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1509219630310442729
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2098659572459812891}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3aee90124d4d6cd40adcc963586cfaaa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerID: 1
+  MovementSpeed: 2
+  JumpForce: 5
+  IsGrounded: 0
+  ThrowForce: 10
+  Trash: {fileID: 0}
