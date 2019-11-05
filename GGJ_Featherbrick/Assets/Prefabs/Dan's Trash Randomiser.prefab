@@ -360,12 +360,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 2455089321513112440}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e1323a509a0abc47840ff8f1b2fc7ab, type: 3}
+  m_Script: {fileID: 11500000, guid: bd1fcdee784f90a4c8e2e296594e0def, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnPoints: []
+  spawnPoints:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   trash: {fileID: 0}
-  trashPrefab: {fileID: 1898743047142264560, guid: 9381ca3fe1557fa438fb4d4cd862f59d,
+  trashPrefab: {fileID: 1898743047142264560, guid: 2a9f3460f50ec1e4f943971f8cf420ab,
     type: 3}
 --- !u!1 &4043366314449020866
 GameObject:
