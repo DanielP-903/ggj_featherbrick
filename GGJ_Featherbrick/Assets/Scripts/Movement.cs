@@ -4,16 +4,21 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
+    //player ID to track which player is controlling this character
+    public int playerID = 0;
 
     public float speed = 2;
-    public bool is_grounded;
+    public bool is_grounded = false;
     Vector2 movement_position;
 
-    private CharacterController characterController;
     // Start is called before the first frame update
     void Start()
     {
       
+    }
+    void HandleInput()
+    {
+
     }
 
     // Update is called once per frame
