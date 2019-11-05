@@ -14,7 +14,6 @@ public class Movement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-      
     }
 
     // Update is called once per frame
@@ -38,8 +37,14 @@ public class Movement : MonoBehaviour
         }
 
         //this.GetComponent<Rigidbody>().MovePosition(new Vector3(transform.position.x + movement.x, transform.position.y, 0));
-        this.GetComponent<Rigidbody>().AddForce(((movement * 0.75f)) + (jumpforce * 5.0f), ForceMode.Impulse);
-
+        if (is_grounded)
+        {
+            this.GetComponent<Rigidbody>().AddForce(((movement * 0.75f)) + (jumpforce * 10.0f), ForceMode.Impulse);
+        }
+        else
+        {
+            this.GetComponent<Rigidbody>().AddForce(((movement * 0.75f)) + (jumpforce * 10.0f) + ((-Vector3.up)/2), ForceMode.Impulse);
+        }
         if (movement.x > 0)
         {
             this.GetComponent<Animator>().Play("TigerAnimation");
