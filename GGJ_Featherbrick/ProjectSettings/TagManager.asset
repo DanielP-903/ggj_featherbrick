@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Trash
+  - Building
+  - Spawn_Point
+  - Bin
   layers:
   - Default
   - TransparentFX
