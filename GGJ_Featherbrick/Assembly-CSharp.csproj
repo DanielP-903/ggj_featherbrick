@@ -62,6 +62,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
     <Compile Include="Assets\Jump.cs" />
     <Compile Include="Assets\Pickup_Throw.cs" />
     <Compile Include="Assets\Scripts\Movement.cs" />
@@ -91,6 +92,37 @@
     </Reference>
     <Reference Include="UnityEditor.UI">
       <HintPath>M:/Game Jam/ggj_featherbrick/GGJ_Featherbrick/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
+=======
+    <Compile Include="Assets\Scripts\Jump.cs" />
+    <Compile Include="Assets\Scripts\Movement.cs" />
+    <Compile Include="Assets\Scripts\Pickup_Throw.cs" />
+    <Reference Include="Unity.Timeline.Editor">
+      <HintPath>M:/GitHub/ggj_featherbrick/GGJ_Featherbrick/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.VSCode.Editor">
+      <HintPath>M:/GitHub/ggj_featherbrick/GGJ_Featherbrick/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.TextMeshPro.Editor">
+      <HintPath>M:/GitHub/ggj_featherbrick/GGJ_Featherbrick/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>M:/GitHub/ggj_featherbrick/GGJ_Featherbrick/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Timeline">
+      <HintPath>M:/GitHub/ggj_featherbrick/GGJ_Featherbrick/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.CollabProxy.Editor">
+      <HintPath>M:/GitHub/ggj_featherbrick/GGJ_Featherbrick/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Rider.Editor">
+      <HintPath>M:/GitHub/ggj_featherbrick/GGJ_Featherbrick/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.TextMeshPro">
+      <HintPath>M:/GitHub/ggj_featherbrick/GGJ_Featherbrick/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.UI">
+      <HintPath>M:/GitHub/ggj_featherbrick/GGJ_Featherbrick/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
+>>>>>>> 6fb98b5f97073a75a9cc0f5e162744f640cd6f57
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>C:/Program Files/Unity2019.2/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>

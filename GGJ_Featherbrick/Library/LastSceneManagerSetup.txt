@@ -1,5 +1,9 @@
 sceneSetups:
+<<<<<<< HEAD
 - path: Assets/Scenes/hugh.unity
+=======
+- path: Assets/Scenes/Dan.unity
+>>>>>>> 6fb98b5f97073a75a9cc0f5e162744f640cd6f57
   isLoaded: 1
   isActive: 1
   isSubScene: 0
