@@ -158,7 +158,6 @@ public class CharacterController : MonoBehaviour
 
         Collider[] playerProximity = Physics.OverlapSphere(transform.position, 3, PlayerMask);
 
-
         if (playerProximity.Length > 0)
         {
             Debug.Log("hello");
