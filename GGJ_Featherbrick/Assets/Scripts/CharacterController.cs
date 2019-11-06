@@ -21,18 +21,24 @@ public class CharacterController : MonoBehaviour
     public float ThrowForce = 2000.0f;
     //Reference to the picked up piece of trash
     public GameObject Trash;
-    //LayerMask to detect trash for pickup
-    public LayerMask trashMask;
     //Tracks the button state of the left trigger
     bool LeftTriggerDown = false;
-    //Layer Mask to detect only other players
-    public LayerMask PlayerMask;
+    //Layer Mask to detect other players and trash
+    public LayerMask ColsMask;
     //How frequently the impulse can be triggered
     public float ImpulseAttackSpeed = 0.5f;
     //Cooldown timer for the impulse
     float ImpulseCooldown = 0.0f;
     //Stores the previous trigger state of the left trigger
     float PreviousTriggerState = 0.0f;
+
+    bool IsHolding = false;
+
+
+    //audio variables
+
+    public AudioClip jumpingAudio;
+    public AudioClip impulseAudio;
 
     // Start is called before the first frame update
     void Start()
@@ -44,6 +50,8 @@ public class CharacterController : MonoBehaviour
     {
         //Set the movement direction along the x-axis using the left analogue stick 
         MovementDirection = new Vector3(Input.GetAxisRaw("Player" + PlayerID + "LH"), 0.0f, 0.0f);
+
+        
         //Set the aim direction using the right analogue stick
         AimDirection = new Vector3(Input.GetAxisRaw("Player" + PlayerID + "RH"), Input.GetAxisRaw("Player" + PlayerID + "RV"), 0.0f);
 
@@ -75,10 +83,23 @@ public class CharacterController : MonoBehaviour
         }
     }
 
-
+    enum AnimationStates { IDLE, IDLEHOLD, RUN, RUNHOLD, JUMP  };
+    AnimationStates CurrentAnim = AnimationStates.IDLE;
     // Update is called once per frame
     void Update()
     {
+        //Ignore Collisions with players and trash
+        CollidersInRadius = Physics.OverlapSphere(transform.position, 5.0f, ColsMask);
+
+        if (CollidersInRadius.Length > 0)
+        {
+            foreach (Collider c in CollidersInRadius)
+            {
+                Physics.IgnoreCollision(c, this.GetComponent<Collider>());
+            }
+        }
+
+
         //Subtract delta time from the impulse cooldown
         ImpulseCooldown -= Time.deltaTime;
 
@@ -89,6 +110,7 @@ public class CharacterController : MonoBehaviour
 
         if (LeftTriggerDown && PreviousTriggerState != 0 && Trash != null)
         {
+            IsHolding = true;
             //If the Left Trigger is held down move the trash object above the player
             Trash.transform.SetPositionAndRotation(new Vector3(transform.position.x, transform.position.y + 1.0f, transform.position.z), Trash.transform.rotation);
         }
@@ -99,6 +121,7 @@ public class CharacterController : MonoBehaviour
         }
         else
         {
+            IsHolding = false;
             //If the left trigger is released, remove the reference to the trash object and allow it to fall in place
             Trash = null;
         }
@@ -106,9 +129,87 @@ public class CharacterController : MonoBehaviour
         //Player movement along the x-axis
         GetComponent<Rigidbody>().AddForce(MovementDirection * MovementSpeed, ForceMode.VelocityChange);
 
+
+        if(!IsGrounded)
+        {
+            CurrentAnim = AnimationStates.JUMP;
+        }
+        else if(!IsHolding)
+        {
+            if(MovementDirection.x != 0)
+            {
+                CurrentAnim = AnimationStates.RUN;
+            }
+            else
+            {
+                CurrentAnim = AnimationStates.IDLE;
+            }
+        }
+        else
+        {
+            if (MovementDirection.x != 0)
+            {
+                CurrentAnim = AnimationStates.RUNHOLD;
+            }
+            else
+            {
+                CurrentAnim = AnimationStates.IDLEHOLD;
+            }
+        }
+
+
+        switch(CurrentAnim)
+        {
+            case AnimationStates.IDLE:
+               GetComponent<Animator>().Play("Idle");
+                break;
+            case AnimationStates.IDLEHOLD:
+                GetComponent<Animator>().Play("IdleHold");
+                break;
+            case AnimationStates.RUN:
+                GetComponent<Animator>().Play("Walk");
+                if(MovementDirection.x > 0)
+                {
+                    GetComponent<SpriteRenderer>().flipX = true;
+                }
+                else
+                {
+                    GetComponent<SpriteRenderer>().flipX = false;
+                }
+                break;
+            case AnimationStates.RUNHOLD:
+                GetComponent<Animator>().Play("WalkHold");
+                if (MovementDirection.x > 0)
+                {
+                    GetComponent<SpriteRenderer>().flipX = true;
+                }
+                else
+                {
+                    GetComponent<SpriteRenderer>().flipX = false;
+                }
+                break;
+            case AnimationStates.JUMP:
+                GetComponent<Animator>().Play("Jump");
+                if (MovementDirection.x > 0)
+                {
+                    GetComponent<SpriteRenderer>().flipX = true;
+                }
+                else
+                {
+                    GetComponent<SpriteRenderer>().flipX = false;
+                }
+                break;
+            default:
+                break;
+
+        }
+
+
+      
         //Store the current state of the left trigger for use in the next frame
         PreviousTriggerState = Input.GetAxisRaw("Player" + PlayerID + "LT");
     }
+    Collider[] CollidersInRadius;
 
     //This function will apply an upward force to the player if they are not midair when called
     void Jump()
@@ -116,6 +217,8 @@ public class CharacterController : MonoBehaviour
         if(IsGrounded)
         {
             GetComponent<Rigidbody>().AddForce(JumpForce * Vector3.up, ForceMode.Impulse);
+
+            this.GetComponent<AudioSource>().PlayOneShot(jumpingAudio);
         }
     }
        
@@ -123,15 +226,24 @@ public class CharacterController : MonoBehaviour
     void PickupTrash()
     {
         //Get an array of all the nearby colliders, whose game objects are on the trash layer
-        Collider[] trashProximity = Physics.OverlapSphere(transform.position, 1, trashMask);
+        //  Collider[] trashProximity = Physics.OverlapSphere(transform.position, 1, trashMask);
 
         //Check that a piece of trash is found
-        if (trashProximity.Length > 0)
+        if (CollidersInRadius.Length > 0)
         {
-            //Store a local reference to the trash game object
-            Trash = trashProximity[0].gameObject;
-            //Move the piece of trash to be above the players head
-            Trash.transform.SetPositionAndRotation(new Vector3(transform.position.x, transform.position.y + 1.0f, transform.position.z), Trash.transform.rotation);
+            foreach (Collider c in CollidersInRadius)
+            {
+                if (c.gameObject.tag == "Trash" && Vector3.Distance(c.gameObject.transform.position, transform.position) <= 1.5f)
+                {
+                    IsHolding = true;
+                    //Store a local reference to the trash game object
+
+                    Trash = c.gameObject;
+                    //Move the piece of trash to be above the players head
+                    Trash.transform.SetPositionAndRotation(new Vector3(transform.position.x, transform.position.y + 1.0f, transform.position.z), Trash.transform.rotation);
+                    return;
+                }
+            }
         }
         else
         {
@@ -156,22 +268,22 @@ public class CharacterController : MonoBehaviour
     {
         ImpulseCooldown = 1.0f / ImpulseAttackSpeed;
 
-        Collider[] playerProximity = Physics.OverlapSphere(transform.position, 3, PlayerMask);
-
-
-        if (playerProximity.Length > 0)
+        //  Collider[] playerProximity = Physics.OverlapSphere(transform.position, 3, PlayerMask);
+        if (CollidersInRadius.Length > 0)
         {
-            Debug.Log("hello");
-            for (int i = 0; i < playerProximity.Length; i++)
+            foreach (Collider c in CollidersInRadius)
             {
-                if (playerProximity[i].gameObject != this.gameObject)
+                if (c.gameObject.tag == "Player" && c.gameObject != gameObject)
                 {
-                    Vector2 direction = playerProximity[i].gameObject.transform.position - transform.position;
+                    Vector2 direction = c.gameObject.transform.position - transform.position;
                     direction.Normalize();
-                    playerProximity[i].gameObject.GetComponent<Rigidbody>().AddForce(new Vector3(direction.x * 10, direction.y, 0) * 100);
+                    c.gameObject.GetComponent<Rigidbody>().AddForce(new Vector3(direction.x * 10, direction.y, 0) * 100);
+                    this.GetComponent<AudioSource>().PlayOneShot(impulseAudio);
+                    c.gameObject.GetComponent<CharacterController>().Trash = null;
                 }
             }
         }
+       
     }
 
     //The following functions detect if the player is colliding with the ground
@@ -183,11 +295,5 @@ public class CharacterController : MonoBehaviour
         }
     }
 
-    private void OnCollisionExit(Collision collision)
-    {
-        if(collision.gameObject.tag == "Building")
-        {
-            IsGrounded = false;
-        }
-    }
+   
 }
