@@ -4,11 +4,9 @@ using UnityEngine;
 
 public class BinCollector : MonoBehaviour
 {
-    public static int[] score = new int[4];
     // Start is called before the first frame update
     void Start()
     {
-        //score[0] = player 1, score[1] = player 2 etc.
     }
 
     // Update is called once per frame
@@ -25,29 +23,29 @@ public class BinCollector : MonoBehaviour
             {
                 case 1:
                     {
-                        score[0]++; // Add to player 1 score
-                        Debug.Log("P1 score updated to: " + score[0]);
+                         GLOBAL_.player1Score++; // Add to player 1 score
+                        Debug.Log("P1 score updated to: " + GLOBAL_.player1Score);
                         Destroy(collision.gameObject);
                         break;
                     }
                 case 2:
                     {
-                        score[1]++; // Add to player 2 score
-                        Debug.Log("P2 score updated to: " + score[1]);
+                        GLOBAL_.player2Score++; // Add to player 2 score
+                        Debug.Log("P2 score updated to: " + GLOBAL_.player2Score);
                         Destroy(collision.gameObject);
                         break;
                     }
                 case 3:
                     {
-                        score[2]++; // Add to player 3 score
-                        Debug.Log("P3 score updated to: " + score[2]);
+                        GLOBAL_.player3Score++; // Add to player 3 score
+                        Debug.Log("P3 score updated to: " + GLOBAL_.player3Score);
                         Destroy(collision.gameObject);
                         break;
                     }
                 case 4:
                     {
-                        score[3]++; // Add to player 4 score
-                        Debug.Log("P4 score updated to: " + score[3]);
+                        GLOBAL_.player4Score++; // Add to player 4 score
+                        Debug.Log("P4 score updated to: " + GLOBAL_.player4Score);
                         Destroy(collision.gameObject);
                         break;
                     }

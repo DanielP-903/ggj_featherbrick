@@ -63,12 +63,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\Archive\ControllerManager.cs" />
+    <Compile Include="Assets\Scripts\Archive\Jump.cs" />
+    <Compile Include="Assets\Scripts\Archive\Pickup_Throw.cs" />
+    <Compile Include="Assets\Scripts\BinCollector.cs" />
     <Compile Include="Assets\Scripts\CharacterController.cs" />
-    <Compile Include="Assets\Scripts\ControllerManager.cs" />
     <Compile Include="Assets\Scripts\DynamicCamera.cs" />
-    <Compile Include="Assets\Scripts\Jump.cs" />
-    <Compile Include="Assets\Scripts\Pickup_Throw.cs" />
-    <Compile Include="Assets\TrashSpawner.cs" />
+    <Compile Include="Assets\Scripts\GLOBAL_.cs" />
+    <Compile Include="Assets\Scripts\Ownership.cs" />
+    <Compile Include="Assets\Scripts\PlayerSelect.cs" />
+    <Compile Include="Assets\Scripts\TrashSpawner.cs" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>D:/GGJ/ggj_featherbrick/GGJ_Featherbrick/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>

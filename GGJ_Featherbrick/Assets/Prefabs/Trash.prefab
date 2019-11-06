@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1898743047142264573}
   - component: {fileID: 1898743047142264562}
   - component: {fileID: 1898743047142264563}
-  - component: {fileID: 4301043640521795593}
+  - component: {fileID: 7261252380315317868}
   m_Layer: 0
   m_Name: Trash
   m_TagString: Trash
@@ -110,7 +110,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 120
   m_CollisionDetection: 0
---- !u!114 &4301043640521795593
+--- !u!114 &7261252380315317868
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -119,7 +119,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1898743047142264560}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2936784aae5265c418e9dc55a66f5ad6, type: 3}
+  m_Script: {fileID: 11500000, guid: 0e2ab6841f6fd954d9c063fb53b0596b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ownerID: 0

@@ -223,6 +223,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 8443729487466293325, guid: c8f5c57baeccbb84391e335d6e57f571,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 2144508549241547541, guid: c8f5c57baeccbb84391e335d6e57f571,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -288,6 +293,11 @@ PrefabInstance:
       propertyPath: m_Drag
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 8252988792599487732, guid: c8f5c57baeccbb84391e335d6e57f571,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 4061375748130041497, guid: c8f5c57baeccbb84391e335d6e57f571, type: 3}
     - {fileID: 3192475649404842785, guid: c8f5c57baeccbb84391e335d6e57f571, type: 3}
@@ -315,11 +325,15 @@ MonoBehaviour:
   MovementSpeed: 0.75
   JumpForce: 5
   IsGrounded: 0
-  ThrowForce: 10
+  ThrowForce: 750
   Trash: {fileID: 0}
   trashMask:
     serializedVersion: 2
     m_Bits: 256
+  PlayerMask:
+    serializedVersion: 2
+    m_Bits: 0
+  ImpulseAttackSpeed: 0.5
 --- !u!1 &654573966
 GameObject:
   m_ObjectHideFlags: 0
@@ -420,6 +434,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8443729487466293325, guid: c8f5c57baeccbb84391e335d6e57f571,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 2144508549241547541, guid: c8f5c57baeccbb84391e335d6e57f571,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -485,6 +504,11 @@ PrefabInstance:
       propertyPath: m_Drag
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 8252988792599487732, guid: c8f5c57baeccbb84391e335d6e57f571,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 4061375748130041497, guid: c8f5c57baeccbb84391e335d6e57f571, type: 3}
     - {fileID: 3192475649404842785, guid: c8f5c57baeccbb84391e335d6e57f571, type: 3}
@@ -517,6 +541,10 @@ MonoBehaviour:
   trashMask:
     serializedVersion: 2
     m_Bits: 256
+  PlayerMask:
+    serializedVersion: 2
+    m_Bits: 0
+  ImpulseAttackSpeed: 0.5
 --- !u!1001 &1770249307
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -533,6 +561,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8443729487466293325, guid: c8f5c57baeccbb84391e335d6e57f571,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 2144508549241547541, guid: c8f5c57baeccbb84391e335d6e57f571,
         type: 3}
@@ -599,6 +632,11 @@ PrefabInstance:
       propertyPath: m_Drag
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 8252988792599487732, guid: c8f5c57baeccbb84391e335d6e57f571,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 4061375748130041497, guid: c8f5c57baeccbb84391e335d6e57f571, type: 3}
     - {fileID: 3192475649404842785, guid: c8f5c57baeccbb84391e335d6e57f571, type: 3}
@@ -631,6 +669,10 @@ MonoBehaviour:
   trashMask:
     serializedVersion: 2
     m_Bits: 256
+  PlayerMask:
+    serializedVersion: 2
+    m_Bits: 0
+  ImpulseAttackSpeed: 0.5
 --- !u!23 &615632091154311092
 MeshRenderer:
   m_ObjectHideFlags: 0
