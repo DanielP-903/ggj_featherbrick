@@ -63,6 +63,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\background.cs" />
     <Compile Include="Assets\Scripts\Archive\ControllerManager.cs" />
     <Compile Include="Assets\Scripts\Archive\Jump.cs" />
     <Compile Include="Assets\Scripts\Archive\Pickup_Throw.cs" />

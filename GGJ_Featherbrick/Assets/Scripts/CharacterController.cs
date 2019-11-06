@@ -271,6 +271,7 @@ public class CharacterController : MonoBehaviour
         if (CollidersInRadius.Length > 0)
 
         {
+            this.GetComponent<AudioSource>().PlayOneShot(impulseAudio);
             foreach (Collider c in CollidersInRadius)
             {
                 if (c.gameObject.tag == "Player" && c.gameObject != gameObject)
@@ -278,7 +279,7 @@ public class CharacterController : MonoBehaviour
                     Vector2 direction = c.gameObject.transform.position - transform.position;
                     direction.Normalize();
                     c.gameObject.GetComponent<Rigidbody>().AddForce(new Vector3(direction.x * 10, direction.y, 0) * 100);
-                    this.GetComponent<AudioSource>().PlayOneShot(impulseAudio);
+                    
                     c.gameObject.GetComponent<CharacterController>().Trash = null;
                 }
             }
