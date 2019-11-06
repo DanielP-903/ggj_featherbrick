@@ -106,8 +106,5 @@ MonoBehaviour:
   cameraYResponsiveness: 1
   maxZoomFOV: 40
   minZoomFOV: 10
-  maxDistance: 10
   cameraZoomResponsivenss: 1
-  ListOfFollowing:
-  - {fileID: 0}
-  - {fileID: 0}
+  ListOfFollowing: []

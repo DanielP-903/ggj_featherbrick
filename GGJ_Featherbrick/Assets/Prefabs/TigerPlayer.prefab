@@ -115,10 +115,10 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 54254379
+  m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: d2ed9b9ea35b6624d95e4b400a490aba, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d882c3afe5c1b7c44ad9828846be0f65, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -168,7 +168,7 @@ Animator:
   m_GameObject: {fileID: 6329615933206672665}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: f067b4a5711b82a42a699a4f96f846fc, type: 2}
+  m_Controller: {fileID: 0}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -195,6 +195,9 @@ MonoBehaviour:
   IsGrounded: 0
   ThrowForce: 2000
   Trash: {fileID: 0}
-  trashMask:
+  ColsMask:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 0
+  ImpulseAttackSpeed: 0.5
+  jumpingAudio: {fileID: 0}
+  impulseAudio: {fileID: 0}

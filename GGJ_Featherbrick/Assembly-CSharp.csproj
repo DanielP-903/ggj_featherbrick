@@ -70,8 +70,10 @@
     <Compile Include="Assets\Scripts\CharacterController.cs" />
     <Compile Include="Assets\Scripts\DynamicCamera.cs" />
     <Compile Include="Assets\Scripts\GLOBAL_.cs" />
+    <Compile Include="Assets\Scripts\HUDText.cs" />
     <Compile Include="Assets\Scripts\MainMenuSceneChanger.cs" />
     <Compile Include="Assets\Scripts\Ownership.cs" />
+    <Compile Include="Assets\Scripts\PlayerManager.cs" />
     <Compile Include="Assets\Scripts\PlayerSelect.cs" />
     <Compile Include="Assets\Scripts\TrashSpawner.cs" />
     <Reference Include="Unity.Timeline.Editor">
