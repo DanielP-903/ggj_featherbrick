@@ -23,7 +23,7 @@ public class BinCollector : MonoBehaviour
             {
                 case 1:
                     {
-                         GLOBAL_.player1Score++; // Add to player 1 score
+                        GLOBAL_.player1Score++; // Add to player 1 score
                         Debug.Log("P1 score updated to: " + GLOBAL_.player1Score);
                         Destroy(collision.gameObject);
                         break;
