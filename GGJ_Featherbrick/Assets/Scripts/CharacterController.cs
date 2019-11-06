@@ -268,8 +268,8 @@ public class CharacterController : MonoBehaviour
     {
         ImpulseCooldown = 1.0f / ImpulseAttackSpeed;
 
-        //  Collider[] playerProximity = Physics.OverlapSphere(transform.position, 3, PlayerMask);
         if (CollidersInRadius.Length > 0)
+
         {
             foreach (Collider c in CollidersInRadius)
             {
