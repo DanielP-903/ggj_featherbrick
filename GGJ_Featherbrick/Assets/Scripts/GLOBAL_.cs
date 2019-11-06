@@ -19,4 +19,7 @@ public static class GLOBAL_
     public static int player3Score;
     public static int player4Score;
 
+    public static bool MusicEnabled = true;
+    public static bool SoundEnabled = true;
+
 }
