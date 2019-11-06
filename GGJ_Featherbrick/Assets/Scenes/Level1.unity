@@ -159,7 +159,7 @@ MonoBehaviour:
   - {fileID: 9100000, guid: 13b8b0d3ab58ff949b9db2ce3d063761, type: 2}
   - {fileID: 9100000, guid: 735a144f4d330a244bad4edb8fdbd8f1, type: 2}
   - {fileID: 9100000, guid: eb6aa8a129b54e6409c60a9009277ea0, type: 2}
-  PlayerPrefab: {fileID: 6329615933206672665, guid: da2764e63faf79d4cb45850b6778e79a,
+  PlayerPrefab: {fileID: 2098659572459812891, guid: 1a266373e93789448b248ded2bb04911,
     type: 3}
   MainCamera: {fileID: 952039113}
 --- !u!4 &139487342

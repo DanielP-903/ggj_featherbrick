@@ -8,9 +8,9 @@ public class CharacterController : MonoBehaviour
     public int PlayerID = 1;
 
     //Speed that the player moves at
-    public float MovementSpeed = 2.0f;
+    public float MovementSpeed = 1.0f;
     //The force applied to the player jump
-    public float JumpForce = 5.0f;
+    public float JumpForce = 10.0f;
     //Check for if the player is touching the ground
     public bool IsGrounded = false;
     //Movement direction indicated by the left analogue stick
@@ -125,7 +125,7 @@ public class CharacterController : MonoBehaviour
             //If the left trigger is released, remove the reference to the trash object and allow it to fall in place
             Trash = null;
         }
-      
+
         //Player movement along the x-axis
         GetComponent<Rigidbody>().AddForce(MovementDirection * MovementSpeed, ForceMode.VelocityChange);
 
@@ -286,14 +286,45 @@ public class CharacterController : MonoBehaviour
        
     }
 
-    //The following functions detect if the player is colliding with the ground
-    private void OnCollisionStay(Collision collision)
+    private void OnTriggerStay(Collider other)
     {
-        if (collision.gameObject.tag == "Building")
+        if(other.tag == "Building")
         {
+            Debug.Log("Grounded");
             IsGrounded = true;
         }
     }
 
-   
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "Building")
+        {
+            IsGrounded = false;
+        }
+    }
+
+    //The following functions detect if the player is colliding with the ground
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Building" && !IsGrounded)
+        {
+            Vector3 dir = new Vector3();
+            dir = (collision.gameObject.transform.position - transform.gameObject.transform.position);
+            dir.y = -1.0f;
+            GetComponent<Rigidbody>().AddForce(dir * 500);
+        }
+    }
+
+    //The following functions detect if the player is colliding with the ground
+    private void OnCollisionStay(Collision collision)
+    {
+        if (collision.gameObject.tag == "Building" && !IsGrounded)
+        {
+            Vector3 dir = new Vector3();
+           // dir = (collision.gameObject.transform.position - transform.gameObject.transform.position);
+            dir.y = -1.0f;
+            GetComponent<Rigidbody>().AddForce(dir * 500);
+        }
+    }
+
 }
