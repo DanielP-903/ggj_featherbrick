@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using UnityEngine.SceneManagement;
 public class PlayerSelect : MonoBehaviour
 {
 
@@ -39,22 +39,43 @@ public class PlayerSelect : MonoBehaviour
     List<int> takenCharacters = new List<int>();
 
 
-    Color testColours(int selected_character_id)
-    {
-        switch (selected_character_id)
-        {
-            case 0:
-                return new Color(1, 0, 0, 1);
 
-            case 1:
-                return new Color(0, 1, 0, 1);
-            case 2:
-                return new Color(0, 0, 1, 1);
-        }
-        return new Color(1, 1, 0, 1);
-    }
     // Update is called once per frame
 
+
+    void TalkToGlobalVars()
+    {
+        GLOBAL_.player1Score = 0;
+        GLOBAL_.player2Score = 0;
+        GLOBAL_.player3Score = 0;
+        GLOBAL_.player4Score = 0;
+
+        GLOBAL_.is_player_1_active = false;
+        GLOBAL_.is_player_2_active = false;
+        GLOBAL_.is_player_3_active = false;
+        GLOBAL_.is_player_4_active = false;
+
+        if (players[0].is_character_selected)
+        {
+            GLOBAL_.is_player_1_active = true;
+            GLOBAL_.player_1_selected_character = players[0].selected_character_id;
+        }
+        if (players[1].is_character_selected)
+        {
+            GLOBAL_.is_player_2_active = true;
+            GLOBAL_.player_2_selected_character = players[1].selected_character_id;
+        }
+        if (players[2].is_character_selected)
+        {
+            GLOBAL_.is_player_3_active = true;
+            GLOBAL_.player_3_selected_character = players[2].selected_character_id;
+        }
+        if (players[3].is_character_selected)
+        {
+            GLOBAL_.is_player_4_active = true;
+            GLOBAL_.player_4_selected_character = players[3].selected_character_id;
+        }
+    }
 
 
     void Update()
@@ -63,11 +84,18 @@ public class PlayerSelect : MonoBehaviour
         {
             if (players[i].is_character_selected)
             {
-                if (Input.GetAxis("Player" + (i + 1) + "LT") > 0.3)
+                if (Input.GetButtonDown("Player" + (i + 1) + "B"))
                 {
                     players[i].characterImageHolder.color = new Color(1, 1, 1, 1);
+
                     players[i].is_character_selected = false;
                     takenCharacters.Remove(players[i].selected_character_id);
+                    players[i].pressAText.text = " ";
+                }
+                else if (Input.GetButtonDown("Player" + (i + 1) + "Start"))
+                {
+                    TalkToGlobalVars();
+                    SceneManager.LoadScene("Assets/Scenes/Level1.unity", LoadSceneMode.Single);
                 }
             }
             else if (players[i].is_active)
@@ -126,10 +154,10 @@ public class PlayerSelect : MonoBehaviour
                     players[i].cool_down_time = 0;
                 }
 
-                if (Input.GetAxis("Player" + (i + 1) + "LT") > 0.3)
+                if (Input.GetButtonDown("Player" + (i + 1) + "B"))
                 {
 
-                    players[i].characterImageHolder.color = new Color(1.0f, 1.0f, 1.0f, 0);
+                    players[i].characterImageHolder.color = new Color(1.0f, 1.0f, 1.0f, 0.0f);
                     players[i].pressAText.text = "Press 'A' to Join!";
                     players[i].is_active = false;
 
@@ -153,9 +181,10 @@ public class PlayerSelect : MonoBehaviour
                     players[i].pressAText.text = " ";
                     players[i].is_active = true;
                 }
-                else if (Input.GetAxis("Player" + (i + 1) + "LT") > 0.3)
+                else if (Input.GetButtonDown("Player" + (i + 1) + "B"))
                 {
-                    //exit game
+                    SceneManager.LoadScene("Assets/Scenes/MainMenus.unity", LoadSceneMode.Single);
+                    Debug.Log("Error");
                 }
             }
         }
