@@ -5,7 +5,7 @@ using UnityEngine;
 public class CharacterController : MonoBehaviour
 {
     //player ID to track which player is controlling this character
-    public int PlayerID = 0;
+    public int PlayerID = 1;
 
     //Speed that the player moves at
     public float MovementSpeed = 2.0f;
@@ -21,11 +21,14 @@ public class CharacterController : MonoBehaviour
     public float ThrowForce = 10.0f;
     //Reference to the picked up piece of trash
     public GameObject Trash;
-
-    bool TrashPickedUp = false;
+    //LayerMask to detect trash for pickup
+    public LayerMask trashMask;
+    //Detects whether the player is currently holding the traash
     bool HoldingTrash = false;
-    bool InitiallyPressed = false;
-    bool CurrentlyPressed = false;
+    //Tracks the button state of the left trigger
+    bool LeftTriggerDown = false;
+
+    float previousTriggerState = 0.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -40,34 +43,63 @@ public class CharacterController : MonoBehaviour
         MovementDirection = new Vector3(Input.GetAxisRaw("Player" + PlayerID + "LH"), 0.0f, 0.0f);
         //Set the aim direction using the right analogue stick
         AimDirection = new Vector3(Input.GetAxisRaw("Player" + PlayerID + "RH"), Input.GetAxisRaw("Player" + PlayerID + "RV"), 0.0f);
-        
-        //If the left trigger is pressed pickup the trash
+
+
         if (Input.GetAxisRaw("Player" + PlayerID + "LT") != 0)
         {
-            Debug.Log("Player " + PlayerID + " pressed Left Trigger");
-            PickupTrash();
+            LeftTriggerDown = true;
+        }
+        else if (Input.GetAxisRaw("Player" + PlayerID + "LT") == 0)
+        {
+            LeftTriggerDown = false;
         }
 
+
+
+        ////If the left trigger is pressed pickup the trash
+        //if (Input.GetAxisRaw("Player" + PlayerID + "LT") != 0)
+        //{
+        //    PickupTrash();
+        //}
+
         //If the right trigger is pressed throw the trash
-        if (Input.GetAxisRaw("Player" + PlayerID + "RT") != 0)
+        if (Input.GetAxisRaw("Player" + PlayerID + "RT") != 0 && HoldingTrash)
         {
-            Debug.Log("Player " + PlayerID + " pressed Right Trigger");
             ThrowTrash();
         }
 
         //If the A button is pressed then jump
         if (Input.GetAxisRaw("Player" + PlayerID + "A") != 0)
         {
-            Debug.Log("Player " + PlayerID + " pressed A");
             Jump();
         }
     }
+
 
     // Update is called once per frame
     void Update()
     {
         HandleInput();
+
+        
+
+        if (LeftTriggerDown && !HoldingTrash)
+        {
+            PickupTrash();
+        }
+        else if(!LeftTriggerDown && HoldingTrash)
+        {
+            HoldingTrash = false;
+        }
+
+
+        if(HoldingTrash && !thrown)
+        {
+            Trash.transform.SetPositionAndRotation(new Vector3(transform.position.x, transform.position.y + 1.0f, transform.position.z), Trash.transform.rotation);
+        }
+
         GetComponent<Rigidbody>().AddForce(MovementDirection * MovementSpeed, ForceMode.VelocityChange);
+        previousTriggerState = Input.GetAxisRaw("Player" + PlayerID + "LT");
     }
 
     void Jump()
@@ -77,47 +109,31 @@ public class CharacterController : MonoBehaviour
             GetComponent<Rigidbody>().AddForce(JumpForce * Vector3.up, ForceMode.Impulse);
         }
     }
-    
-    bool GetButtonDown()
+       
+    void PickupTrash()
     {
-        if (Input.GetAxisRaw("Pick Up") == 0)
+        Collider[] trashProximity = Physics.OverlapSphere(transform.position, 1, trashMask);
+
+        if (trashProximity.Length > 0)
         {
-            return false;
+            Trash = trashProximity[0].gameObject;
+            HoldingTrash = true;
         }
         else
         {
-            return true;
+            HoldingTrash = false;
+            Trash = null;
         }
     }
 
-    void PickupTrash()
-    {
-        if (CurrentlyPressed && InitiallyPressed)
-        {
-            InitiallyPressed = false;
-        }
-        if (!InitiallyPressed && !CurrentlyPressed)
-        {
-            InitiallyPressed = true;
-            CurrentlyPressed = true;
-        }
-        if (Input.GetAxisRaw("Pick Up") == 0 && CurrentlyPressed)
-        {
-            CurrentlyPressed = false;
-        }
-
-
-
-
-        if(InitiallyPressed)
-        {
-
-        }
-    }
-
+    bool thrown = false;
     void ThrowTrash()
     {
-        //trash.addforce(AimDirection * throwForce);
+        LeftTriggerDown = false;
+        HoldingTrash = false;
+
+        Trash.GetComponent<Rigidbody>().AddForce(AimDirection * 50.0f);
+       
     }
 
     void ActivateShield()
